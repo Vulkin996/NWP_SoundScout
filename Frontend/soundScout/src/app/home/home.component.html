@@ -1,0 +1,50 @@
+<div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            <form class="bd-search d-flex align-items-center" role="search">
+                <span class="algolia-autocomplete algolia-autocomplete-left">
+                    <input class="form-control ds-input" type="search" placeholder="Search..." autocomplete="off"
+                        spellcheck="false">
+                </span>
+            </form>
+            <nav class="collapse bd-links">
+                <div class="bd-toc-item active">
+                    <h3 class="bd-toc-link">Filters:</h3>
+                </div>
+                <div class="bd-toc-item active">
+                    <select class="form-control">
+                        <option selected disabled>Genre</option>
+                        <option>Techno</option>
+                        <option>Metal</option>
+                        <option>Rock</option>
+                        <option>Pop</option>
+                        <option>Jazz</option>
+                        <option>Classical</option>
+                        <option>Any</option>
+                    </select>
+                </div>
+                <div class="bd-toc-item active">
+                    <select class="form-control">
+                        <option selected disabled>Type</option>
+                        <option>Festival</option>
+                        <option>Concert</option>
+                    </select>
+                </div>
+                <div class="bd-toc-item active">
+                    <div data-role="rangeslider">
+                        <label for="price-min">Maximum Price:</label>
+                        <br/>
+                        <input type="range" name="price-min" id="price-min" value="200" min="0" max="1000">
+                    </div>
+                </div>
+                <div class="bd-toc-item active">
+
+                </div>
+            </nav>
+        </div>
+
+        <main class="bd-content" role="main">
+
+        </main>
+    </div>
+</div>
