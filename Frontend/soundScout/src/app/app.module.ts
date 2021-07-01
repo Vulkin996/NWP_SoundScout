@@ -7,11 +7,16 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
+import { ProfileComponent } from './user/profile/profile.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   { path:'', redirectTo:'/home', pathMatch:'full' },
   { path:'home', component:HomeComponent },
-  { path:'login', component:LoginComponent }
+  { path:'login', component:LoginComponent },
+  { path:'register', component:RegisterComponent },
+  { path:'profile', component:ProfileComponent },
+  { path:'admin', component:AdminComponent }
 ];
 
 @NgModule({
@@ -20,7 +25,9 @@ const routes: Routes = [
     HomeComponent,
     HeaderComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
