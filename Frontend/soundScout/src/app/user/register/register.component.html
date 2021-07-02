@@ -1,18 +1,18 @@
-<div id="wrapper">
-    <form class="form-signin">
+<div id="wrapper" class="form-group">
+    <form class="form-signin" (ngSubmit)="register()">
         <div class="text-center">
             <img class="mb-4" src="assets/image/logo.png" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Welcome to SoundScout!</h1>
         </div>
 
         <span>Enter your username</span>
-        <input type="text" id="inputUsername" class="form-control" placeholder="Username" required="" autofocus="">
+        <input type="text" name="username" class="form-control" placeholder="Username" required autofocus="" [(ngModel)]="username">
 
         <span>Please provide your email address</span>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+        <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus="" [(ngModel)]="email">
 
         <span>Create a password</span>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+        <input type="password" name="password" class="form-control" placeholder="Password" required [(ngModel)]="password">
 
         <span>Confirm your password</span>
         <input type="password" id="inputPasswordConfirm" class="form-control" placeholder="Password (confirm)" required="">

@@ -10,6 +10,9 @@ import { RegisterComponent } from './user/register/register.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { AdminComponent } from './admin/admin.component';
 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
 const routes: Routes = [
   { path:'', redirectTo:'/home', pathMatch:'full' },
   { path:'home', component:HomeComponent },
@@ -31,7 +34,9 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
