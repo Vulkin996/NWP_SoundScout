@@ -1,12 +1,12 @@
-<div id="wrapper" class="text-center">
-    <form class="form-signin">
+<div id="wrapper" class="text-center form-group">
+    <form class="form-signin" (ngSubmit)="login()">
         <img class="mb-4" src="assets/image/logo.png" alt="" width="72"
             height="72">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+        
+        <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus="" [(ngModel)]="email">
+        <input type="password" name="password" class="form-control" placeholder="Password" required [(ngModel)]="password">
+        
         <div class="checkbox mb-3">
             <label>
                 <input type="checkbox" value="remember-me"> Remember me
