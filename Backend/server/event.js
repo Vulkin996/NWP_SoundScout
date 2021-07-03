@@ -9,8 +9,8 @@ module.exports = router;
 router.post('/addLocation', (req, res) => {
     var location = req.body;
 
-    var sql = "INSERT INTO location (Name, Country, City, Address) VALUES ('" + location.name + "', '" + location.country + "', '" + location.city + "', '" + location.address + "' )";
-    mysqlConnection.query(sql, function (err, result) {
+    var sql = "INSERT INTO location (Name, Country, City, Address) VALUES(?, ?, ?, ?)";
+    mysqlConnection.query(sql, [location.name, location.country, location.city, location.address], function (err, result) {
         if (err) {
             switch (err.code) {
                 default:
@@ -28,8 +28,8 @@ router.post('/addArtist', (req, res) => {
     var artist = req.body;
     var genreID = -1;
 
-    var sql = "SELECT * FROM genre WHERE Name = '" + artist.genre + "'"
-    mysqlConnection.query(sql, function (err, result1) {
+    var sql = "SELECT * FROM genre WHERE Name = ?"
+    mysqlConnection.query(sql, [artist.genre], function (err, result1) {
         if (err) {
             switch (err.code) {
                 default:
@@ -42,8 +42,8 @@ router.post('/addArtist', (req, res) => {
                 console.log("Successfuly retrived genre")
                 genreID = result1[0].idgenre;
 
-                var sql = "INSERT INTO artist (Name, GenreID) VALUES ('" + artist.name + "', " + genreID + " )";
-                mysqlConnection.query(sql, function (err, result3) {
+                var sql = "INSERT INTO artist (Name, GenreID) VALUES (?, ?)";
+                mysqlConnection.query(sql, [artist.name, genreID], function (err, result3) {
                     if (err) {
                         switch (err.code) {
                             default:
@@ -58,8 +58,8 @@ router.post('/addArtist', (req, res) => {
             }
             else {
                 //there is no such genre
-                var sql = "INSERT INTO genre (Name) VALUES ('" + artist.genre + "' )"
-                mysqlConnection.query(sql, function (err, result2) {
+                var sql = "INSERT INTO genre (Name) VALUES (?)"
+                mysqlConnection.query(sql, [artist.genre], function (err, result2) {
                     if (err) {
                         switch (err.code) {
                             default:
@@ -70,8 +70,8 @@ router.post('/addArtist', (req, res) => {
                         console.log("Successfuly inserted new genre");
                         genreID = result2.insertId;
 
-                        var sql = "INSERT INTO artist (Name, GenreID) VALUES ('" + artist.name + "', " + genreID + " )";
-                        mysqlConnection.query(sql, function (err, result3) {
+                        var sql = "INSERT INTO artist (Name, GenreID) VALUES (?, ?)";
+                        mysqlConnection.query(sql, [artist.name, genreID], function (err, result3) {
                             if (err) {
                                 switch (err.code) {
                                     default:
@@ -119,8 +119,8 @@ router.get('/getArtist', (req, res) => {
 router.post('/deleteArtist', (req, res) => {
     var artist = req.body;
 
-    var sql = "DELETE FROM artist WHERE Name = '" + artist.artistName + "'";
-    mysqlConnection.query(sql, function (err, result) {
+    var sql = "DELETE FROM artist WHERE Name = ?";
+    mysqlConnection.query(sql, [artist.artistName], function (err, result) {
         if (err) {
             switch (err.code) {
                 default:
@@ -137,8 +137,8 @@ router.post('/deleteArtist', (req, res) => {
 router.post('/deleteLocation', (req, res) => {
     var location = req.body;
 
-    var sql = "DELETE FROM location WHERE Name = '" + location.locationName + "'";
-    mysqlConnection.query(sql, function (err, result) {
+    var sql = "DELETE FROM location WHERE Name = ?";
+    mysqlConnection.query(sql, [location.locationName], function (err, result) {
         if (err) {
             switch (err.code) {
                 default:
@@ -174,6 +174,51 @@ router.get('/getLocation', (req, res) => {
                 return res.status(200).json(foundProducts);
             }
             return res.status(200).json(locations);
+        }
+    });
+});
+
+router.post('/addEvent', (req, res) => {
+    var event = req.body;
+
+    var locationID;
+    var artistID;
+
+    var sql = "SELECT * FROM location WHERE Name = ?";
+    mysqlConnection.query(sql, [event.locationName], function (err, result) {
+        if (err) {
+            switch (err.code) {
+                default:
+                    res.status(500).json({ msg: err.message });
+            }
+        }
+        else {
+            locationID = result[0].idlocation;
+            var sql = "SELECT * FROM artist WHERE Name = ?";
+            mysqlConnection.query(sql, [event.artistName], function (err, result2) {
+                if (err) {
+                    switch (err.code) {
+                        default:
+                            res.status(500).json({ msg: err.message });
+                    }
+                }
+                else {
+                    artistID = result2[0].idArtist;
+                    var sql = "INSERT INTO event (Name, LocationID, artistID, Date, Price, Type, MaxTickets, picture) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                    mysqlConnection.query(sql, [event.name, locationID, artistID, event.date, event.price, event.type, event.maxTickets, event.picture], function (err, result2) {
+                        if (err) {
+                            switch (err.code) {
+                                default:
+                                    res.status(500).json({ msg: err.message });
+                            }
+                        }
+                        else {
+                            res.status(200).json({ msg: "Event successfully added!" });
+                            console.log("Event successfully added");
+                        }
+                    });
+                }
+            });
         }
     });
 });

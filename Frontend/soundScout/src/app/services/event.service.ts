@@ -52,4 +52,17 @@ export class EventService {
       params: {q: query}
     })
   }
+
+  addEvent(name: string, locationName: string, artistName: string, date: Date, price: number, type: string, maxTickets: number): Observable<any> {
+    return this.httpClient.post(this.BACKEND_BASE + "/api/event/addEvent", {
+      name:name,
+      locationName:locationName,
+      artistName:artistName,
+      date: date,
+      price: price,
+      type: type,
+      maxTickets: maxTickets,
+      picture: ""
+    })
+  }
 }

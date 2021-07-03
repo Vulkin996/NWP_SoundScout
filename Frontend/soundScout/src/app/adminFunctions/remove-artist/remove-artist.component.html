@@ -5,7 +5,7 @@
     <form (ngSubmit)="deleteArtist()">
         <div class="form-group">
             <select name="chosenArtist" class="form-control" [(ngModel)]="chosenArtist">
-                <option selected disabled>Choose...</option>
+                <option selected  value='' disabled>Choose...</option>
                 <option *ngFor="let artist of artists" value="{{artist.Name}}">{{artist.Name}}</option>
             </select>
         </div>
