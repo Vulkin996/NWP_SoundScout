@@ -2,11 +2,11 @@
     
     <h5>Select the artist to remove...</h5>
     
-    <form>
+    <form (ngSubmit)="deleteArtist()">
         <div class="form-group">
-            <select name="artist" class="form-control">
+            <select name="chosenArtist" class="form-control" [(ngModel)]="chosenArtist">
                 <option selected disabled>Choose...</option>
-                <option>...</option>
+                <option *ngFor="let artist of artists" value="{{artist.Name}}">{{artist.Name}}</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Delete</button>

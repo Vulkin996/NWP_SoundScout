@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-add-artist',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddArtistComponent implements OnInit {
 
-  constructor() { }
+  public name: string = '';
+  public genre: string = '';
+
+  constructor(private eventService: EventService) { }
 
   ngOnInit(): void {
   }
+
+  addArtist() {
+    this.eventService.addArtist(this.name, this.genre).subscribe(resp => {
+      alert(resp.msg);
+    })
+   }
 
 }

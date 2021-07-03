@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-add-location',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddLocationComponent implements OnInit {
 
-  constructor() { }
+  public name: string = '';
+  public country: string = '';
+  public city: string = '';
+  public address: string = '';
+
+  constructor(private eventService: EventService) { }
 
   ngOnInit(): void {
+  }
+
+  addLocation() {
+    this.eventService.addLocation(this.name, this.country, this.city, this.address).subscribe(resp => {
+      alert(resp.msg);
+    })
   }
 
 }

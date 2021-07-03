@@ -2,11 +2,11 @@
     
     <h5>Select the location to remove...</h5>
     
-    <form>
+    <form (ngSubmit)="deleteLocation()">
         <div class="form-group">
-            <select name="location" class="form-control">
+            <select name="location" class="form-control" [(ngModel)]="chosenLocation">
                 <option selected disabled>Choose...</option>
-                <option>...</option>
+                <option *ngFor="let location of locations" value="{{location.Name}}">{{location.Name}}</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Delete</button>
