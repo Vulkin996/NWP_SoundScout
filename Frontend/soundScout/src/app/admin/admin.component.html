@@ -1,1 +1,45 @@
-<p>admin works!</p>
+<div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-4 col-xl-2 bd-sidebar">
+            <div class="topSpace"></div>
+            <nav class="collapse bd-links">
+                <div class="bd-toc-item active">
+                    <button type="button" class="btn btn-secondary btn-lg" (click)="adminFunction(1)">Add Event</button>
+                </div>
+                <div class="bd-toc-item active">
+                    <button type="button" class="btn btn-secondary btn-lg " (click)="adminFunction(2)">Remove Event</button>
+                </div>
+                <div class="bd-toc-item active">
+                    <button type="button" class="btn btn-secondary btn-lg " (click)="adminFunction(3)">Add Artist</button>
+                </div>
+                <div class="bd-toc-item active">
+                    <button type="button" class="btn btn-secondary btn-lg " (click)="adminFunction(4)">Remove Artist</button>
+                </div>
+                <div class="bd-toc-item active">
+                    <button type="button" class="btn btn-secondary btn-lg " (click)="adminFunction(5)">Add Location</button>
+                </div>
+                <div class="bd-toc-item active">
+                    <button type="button" class="btn btn-secondary btn-lg " (click)="adminFunction(6)">Remove Location</button>
+                </div>
+                <div class="bd-toc-item active">
+                    <button type="button" class="btn btn-secondary btn-lg" (click)="adminFunction(7)">Remove User</button>
+                </div>
+                <div class="bd-toc-item active">
+                    <button type="button" class="btn btn-secondary btn-lg" (click)="adminFunction(8)">Give Admin</button>
+                </div>
+            </nav>
+            <div class="bottomSpace"></div>
+        </div>
+
+        <main class="bd-content" role="main">
+            <app-add-event *ngIf="selectedFunction == 1"></app-add-event>
+            <app-remove-event *ngIf="selectedFunction == 2"></app-remove-event>
+            <app-add-artist *ngIf="selectedFunction == 3"></app-add-artist>
+            <app-remove-artist *ngIf="selectedFunction == 4"></app-remove-artist>
+            <app-add-location *ngIf="selectedFunction == 5"></app-add-location>
+            <app-remove-location *ngIf="selectedFunction == 6"></app-remove-location>
+            <app-remove-user *ngIf="selectedFunction == 7"></app-remove-user>
+            <app-give-admin *ngIf="selectedFunction == 8"></app-give-admin>
+        </main>
+    </div>
+</div>

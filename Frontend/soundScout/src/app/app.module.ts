@@ -12,6 +12,14 @@ import { AdminComponent } from './admin/admin.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AddEventComponent } from './adminFunctions/add-event/add-event.component';
+import { RemoveEventComponent } from './adminFunctions/remove-event/remove-event.component';
+import { RemoveUserComponent } from './adminFunctions/remove-user/remove-user.component';
+import { GiveAdminComponent } from './adminFunctions/give-admin/give-admin.component';
+import { AddArtistComponent } from './adminFunctions/add-artist/add-artist.component';
+import { RemoveArtistComponent } from './adminFunctions/remove-artist/remove-artist.component';
+import { AddLocationComponent } from './adminFunctions/add-location/add-location.component';
+import { RemoveLocationComponent } from './adminFunctions/remove-location/remove-location.component';
 
 const routes: Routes = [
   { path:'', redirectTo:'/home', pathMatch:'full' },
@@ -30,7 +38,15 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    AdminComponent
+    AdminComponent,
+    AddEventComponent,
+    RemoveEventComponent,
+    RemoveUserComponent,
+    GiveAdminComponent,
+    AddArtistComponent,
+    RemoveArtistComponent,
+    AddLocationComponent,
+    RemoveLocationComponent
   ],
   imports: [
     BrowserModule,

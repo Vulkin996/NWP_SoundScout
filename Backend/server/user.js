@@ -18,7 +18,7 @@ router.post('/login', (req, res) => {
         else {
             if (result.length != 1) {
                 console.log("Invalid login!");
-                res.status(400).json({msg: 'Invalid username or password'});
+                res.status(400).json({ msg: 'Invalid username or password' });
             }
             else {
                 console.log("User successfully logged in");
@@ -50,5 +50,14 @@ router.post('/register', (req, res) => {
         }
     });
 });
+
+var checkIfLoggedIn = (req, res, next) => {
+    var token = req.get('X-AUTH-HEADER');
+    var user = jwt.decode(token);
+    if (user && user.user) {
+        return next();
+    }
+    return res.status(403).json({ msg: 'Please login to access this information' });
+};
 
 module.exports = router;

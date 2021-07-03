@@ -1,0 +1,54 @@
+<div class="container-flex">
+    <h5>Please provide event information here: </h5>
+
+    <form>
+        <div class="form-group">
+            <label>Event Name</label>
+            <input type="text" class="form-control" name="name" placeholder="Name">
+        </div>
+        <div class="form-group">
+            <label>Type</label>
+            <select name="type" class="form-control">
+                <option selected disabled>Choose...</option>
+                <option>Concert</option>
+                <option>Festival</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Location</label>
+            <select name="location" class="form-control">
+                <option selected disabled>Choose...</option>
+                <option>...</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Artist</label>
+            <select name="artist" class="form-control">
+                <option selected disabled>Choose...</option>
+                <option>...</option>
+            </select>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Price</label>
+                <input type="text" class="form-control" name="price" placeholder="0.0$">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label>Maximum number of tickets</label>
+                <input type="text" class="form-control" name="maxTickets" placeholder="1000">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Date</label>
+            <input type="date" class="form-control" name="maxTickets">
+        </div>
+        
+        <div class="form-row">
+        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="button" class="btn btn-secondary">Add a picture</button>
+        </div>
+    </form>
+</div>

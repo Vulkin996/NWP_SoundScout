@@ -1,0 +1,33 @@
+.bd-search {
+    position: relative;
+    padding: 1rem 15px;
+    margin-right: -15px;
+    margin-left: -15px;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+}
+
+.bd-sidebar {
+    border-right: 1px solid rgba(0,0,0,.1);
+}
+
+.bd-links {
+    display: block !important;
+    max-height: calc(100vh - 9rem);
+    overflow-y: auto;
+}
+
+.bd-toc-item {
+    padding: 1rem 15px;
+}
+
+.btn {
+    width: 13rem !important;
+}
+
+.topSpace {
+    margin-top: 6rem;
+}
+
+.bottomSpace {
+    margin-bottom: 5rem;
+}

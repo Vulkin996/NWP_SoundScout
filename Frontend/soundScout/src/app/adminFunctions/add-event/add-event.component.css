@@ -1,0 +1,19 @@
+h5 {
+    margin-top: 3px !important;
+    color: #303030;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.container-flex {
+    padding: 4rem;
+}
+
+.btn-primary {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-right: 3rem;
+    margin-left: 4px;
+}

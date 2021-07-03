@@ -7,11 +7,8 @@
         <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus="" [(ngModel)]="email">
         <input type="password" name="password" class="form-control" placeholder="Password" required [(ngModel)]="password">
         
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
+        <h5 *ngIf="error">Invalid email or password!</h5>
+
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
 </div>
