@@ -54,7 +54,11 @@
         </div>
 
         <main class="bd-content" role="main">
-
+            <div class="container album py-5">
+                <div class="row">
+                    <app-event-item *ngFor="let event of events" [eventData]="event" class="col-4"></app-event-item>
+                </div>
+            </div>
         </main>
     </div>
 </div>

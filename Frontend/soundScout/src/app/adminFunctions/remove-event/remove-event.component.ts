@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MusicEvent } from 'src/app/model/musicEvent';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-remove-event',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RemoveEventComponent implements OnInit {
 
-  constructor() { }
+  public events: MusicEvent[] = [];
+  public chosenEvent: string = '';
+
+  constructor(private eventService: EventService) { }
 
   ngOnInit(): void {
+    this.eventService.getEvent("").subscribe(resp => {
+      this.events = resp;
+    });
+  }
+
+  deleteEvent() {
+    if (this.chosenEvent !== '') {
+      this.eventService.deleteEvent(this.chosenEvent).subscribe(resp => {
+        alert(resp.msg)
+      });
+    }
   }
 
 }

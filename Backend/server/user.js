@@ -60,4 +60,48 @@ var checkIfLoggedIn = (req, res, next) => {
     return res.status(403).json({ msg: 'Please login to access this information' });
 };
 
+router.get('/getUsername', (req, res) => {
+
+    var events;
+
+    var sql = "SELECT username, email, isAdmin FROM user";
+    mysqlConnection.query(sql, function (err, result) {
+        if (err) {
+            switch (err.code) {
+                default:
+                    res.status(500).json({ msg: err.message });
+            }
+        }
+        else {
+            users = result;
+
+            var query = (req.query['q'] || '').toLowerCase();
+            if (query) {
+                const foundProducts = users.filter(
+                    (user) => user.name.toLowerCase().indexOf(query) != -1);
+                return res.status(200).json(foundProducts);
+            }
+            return res.status(200).json(users);
+        }
+    });
+});
+
+router.post('/deleteUser', (req, res) => {
+    var user = req.body;
+
+    var sql = "DELETE FROM user WHERE username = ?";
+    mysqlConnection.query(sql, [user.username], function (err, result) {
+        if (err) {
+            switch (err.code) {
+                default:
+                    res.status(500).json({ msg: err.message });
+            }
+        }
+        else {
+            res.status(200).json({ msg: "User successfully removed!" });
+            console.log("User successfully removed!");
+        }
+    });
+});
+
 module.exports = router;

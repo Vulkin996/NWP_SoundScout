@@ -2,11 +2,11 @@
     
     <h5>Select the user to remove...</h5>
     
-    <form>
+    <form (ngSubmit)="deleteUser()">
         <div class="form-group">
-            <select name="username" class="form-control">
-                <option selected disabled>Choose...</option>
-                <option>...</option>
+            <select name="username" class="form-control" [(ngModel)]="chosenUser">
+                <option selected value='' disabled>Choose...</option>
+                <option *ngFor="let user of users" value="{{user.username}}">{{user.username}}</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Delete</button>

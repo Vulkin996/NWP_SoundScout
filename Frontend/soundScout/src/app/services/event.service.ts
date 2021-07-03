@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Artist } from '../model/Artist';
 import { EventLocation } from '../model/EventLocation';
+import { MusicEvent } from '../model/musicEvent';
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +64,18 @@ export class EventService {
       type: type,
       maxTickets: maxTickets,
       picture: ""
+    })
+  }
+
+  getEvent(query: string): Observable<MusicEvent[]> {
+    return this.httpClient.get<MusicEvent[]>(this.BACKEND_BASE + "/api/event/getEvent", {
+      params: {q: query}
+    })
+  }
+
+  deleteEvent(eventName: string): Observable<any> {
+    return this.httpClient.post(this.BACKEND_BASE + "/api/event/deleteEvent", {
+      eventName:eventName
     })
   }
 }

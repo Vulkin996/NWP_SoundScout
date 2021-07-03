@@ -222,3 +222,47 @@ router.post('/addEvent', (req, res) => {
         }
     });
 });
+
+router.get('/getEvent', (req, res) => {
+
+    var events;
+
+    var sql = "SELECT * FROM event";
+    mysqlConnection.query(sql, function (err, result) {
+        if (err) {
+            switch (err.code) {
+                default:
+                    res.status(500).json({ msg: err.message });
+            }
+        }
+        else {
+            events = result;
+
+            var query = (req.query['q'] || '').toLowerCase();
+            if (query) {
+                const foundProducts = events.filter(
+                    (event) => event.name.toLowerCase().indexOf(query) != -1);
+                return res.status(200).json(foundProducts);
+            }
+            return res.status(200).json(events);
+        }
+    });
+});
+
+router.post('/deleteEvent', (req, res) => {
+    var event = req.body;
+
+    var sql = "DELETE FROM event WHERE Name = ?";
+    mysqlConnection.query(sql, [event.eventName], function (err, result) {
+        if (err) {
+            switch (err.code) {
+                default:
+                    res.status(500).json({ msg: err.message });
+            }
+        }
+        else {
+            res.status(200).json({ msg: "Event successfully removed!" });
+            console.log("Event successfully removed!");
+        }
+    });
+});

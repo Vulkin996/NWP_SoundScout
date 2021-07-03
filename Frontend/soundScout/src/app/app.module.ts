@@ -20,14 +20,17 @@ import { AddArtistComponent } from './adminFunctions/add-artist/add-artist.compo
 import { RemoveArtistComponent } from './adminFunctions/remove-artist/remove-artist.component';
 import { AddLocationComponent } from './adminFunctions/add-location/add-location.component';
 import { RemoveLocationComponent } from './adminFunctions/remove-location/remove-location.component';
+import { EventItemComponent } from './event-item/event-item.component';
+import { AuthGuard } from './guards/auth.guard';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 const routes: Routes = [
   { path:'', redirectTo:'/home', pathMatch:'full' },
   { path:'home', component:HomeComponent },
   { path:'login', component:LoginComponent },
   { path:'register', component:RegisterComponent },
-  { path:'profile', component:ProfileComponent },
-  { path:'admin', component:AdminComponent }
+  { path:'profile', component:ProfileComponent, canActivate:[AuthGuard] },
+  { path:'admin', component:AdminComponent, canActivate:[AuthGuard]}
 ];
 
 @NgModule({
@@ -46,7 +49,8 @@ const routes: Routes = [
     AddArtistComponent,
     RemoveArtistComponent,
     AddLocationComponent,
-    RemoveLocationComponent
+    RemoveLocationComponent,
+    EventItemComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,7 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [AuthGuard, {provide: HTTP_INTERCEPTORS, multi: true, useClass:TokenInterceptor}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

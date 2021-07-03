@@ -2,11 +2,11 @@
     
     <h5>Select the event to remove...</h5>
     
-    <form>
+    <form (ngSubmit)="deleteEvent()">
         <div class="form-group">
-            <select name="eventName" class="form-control">
-                <option selected disabled>Choose...</option>
-                <option>...</option>
+            <select name="chosenEvent" class="form-control" [(ngModel)]="chosenEvent">
+                <option selected value='' disabled>Choose...</option>
+                <option *ngFor="let event of events" value="{{event.Name}}">{{event.Name}}</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Delete</button>
