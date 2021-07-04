@@ -24,6 +24,7 @@ import { EventItemComponent } from './event-item/event-item.component';
 import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { AdminGuard } from './guards/admin.guard';
+import { PurchaseComponent } from './purchase/purchase.component';
 
 const routes: Routes = [
   { path:'', redirectTo:'/home', pathMatch:'full' },
@@ -31,7 +32,8 @@ const routes: Routes = [
   { path:'login', component:LoginComponent },
   { path:'register', component:RegisterComponent },
   { path:'profile', component:ProfileComponent, canActivate:[AuthGuard] },
-  { path:'admin', component:AdminComponent, canActivate:[AuthGuard, AdminGuard] }
+  { path:'admin', component:AdminComponent, canActivate:[AuthGuard, AdminGuard] },
+  { path:'purchase', component:PurchaseComponent, canActivate:[AuthGuard] }
 ];
 
 @NgModule({
@@ -51,7 +53,8 @@ const routes: Routes = [
     RemoveArtistComponent,
     AddLocationComponent,
     RemoveLocationComponent,
-    EventItemComponent
+    EventItemComponent,
+    PurchaseComponent
   ],
   imports: [
     BrowserModule,

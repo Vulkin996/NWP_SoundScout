@@ -28,6 +28,7 @@
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
+    height: 100%;
 }
 
 #wrapper {
@@ -46,4 +47,14 @@
     line-height: 1.5;
     color: #212529;
     height: 100%;
+}
+
+main {
+    background-color: #f5f5f5;
+    width: 100%;
+}
+
+.container-fluid {
+        display: block;
+        height: 100%;
 }

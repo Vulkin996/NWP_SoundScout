@@ -3,3 +3,13 @@ html, body {
     margin: 0;
     height: 100%;
 }
+
+app-root {
+    display: block;
+    height: 100%;
+}
+
+app-home {
+    display: block;
+    height: 100%;
+}
