@@ -24,6 +24,9 @@ export class PurchaseComponent implements OnInit {
 
   public eventName: string = '';
 
+  public errorName: boolean = false;
+  public errorAddr: boolean = false;
+
   constructor(private purchaseService: PurchaseService) { }
 
   ngOnInit(): void {
@@ -36,6 +39,17 @@ export class PurchaseComponent implements OnInit {
   }
 
   purchase() {
+
+    if (!this.checkName()) {
+      this.errorName = true;
+      return;
+    }
+
+    if (!this.checkAddress()) {
+      this.errorAddr = true
+      return;
+    }
+
     if (localStorage.getItem("loggedUser")) {
       var username: any = localStorage.getItem("loggedUser")
       this.purchaseService.purchase(username, this.eventName, this.email, this.FirstName, this.LastName, this.Country, this.City, this.zipCode, this.Address, this.Address2, this.paymentMethod).subscribe(resp => {
@@ -44,4 +58,33 @@ export class PurchaseComponent implements OnInit {
     }
   }
 
+  checkName(): boolean {
+    var regexp = new RegExp("[A-Z][a-z\s]+")
+    var test = regexp.test(this.FirstName);
+
+    if (this.FirstName === '' || !test)
+      return false;
+
+    test = regexp.test(this.LastName);
+
+    if (this.LastName === '' || !test)
+      return false;
+
+    return true;
+  }
+  checkAddress(): boolean {
+    var regexp = new RegExp("[A-Z][a-z\s]+")
+    var test = regexp.test(this.City);
+
+    if (this.Address === '' || this.City === '' || this.Country === '' || !test)
+      return false;
+
+    regexp = new RegExp("[0-9]+")
+    test = regexp.test(this.zipCode);
+
+    if (this.zipCode === '' || !test)
+      return false;
+
+    return true;
+  }
 }
