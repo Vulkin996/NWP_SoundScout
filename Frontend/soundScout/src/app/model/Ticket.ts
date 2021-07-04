@@ -5,5 +5,5 @@ export interface Ticket {
     firstName: string,
     lastName: string,
     payment: string,
-    datePurchased: Date
+    datePurchased: any
 }

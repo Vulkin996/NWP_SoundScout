@@ -14,12 +14,16 @@ export class EventItemComponent implements OnInit {
   eventData!: MusicEvent;
 
   public pictureLink: string = "assets/image/default-thumbnail.png";
+  public dateString: string = '';
 
   constructor(private router: Router, private purchaseService: PurchaseService) { }
 
   ngOnInit(): void {
     if (this.eventData.Picture != "")
       this.pictureLink = this.eventData.Picture
+
+    this.dateString = new Date(this.eventData.Date).toDateString()
+
   }
 
   purchase() {

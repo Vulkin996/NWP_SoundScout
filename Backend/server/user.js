@@ -62,6 +62,7 @@ router.post('/register', (req, res) => {
             }
         }
         else {
+            res.status(200).json({ msg: 'You have been registered successfully! Please login' });
             console.log("User successfully registered");
         }
     });

@@ -15,7 +15,8 @@
         <input type="password" name="password" class="form-control" placeholder="Password" required [(ngModel)]="password">
 
         <span>Confirm your password</span>
-        <input type="password" id="inputPasswordConfirm" class="form-control" placeholder="Password (confirm)" required="">
+        <input type="password" name="passwordConfirm" class="form-control" placeholder="Password (confirm)" required="" [(ngModel)]="passwordConfirm">
+        <h5 *ngIf="errorMessage !== ''">{{errorMessage}}</h5>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
     </form>

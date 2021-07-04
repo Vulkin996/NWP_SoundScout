@@ -19,6 +19,8 @@ export class ProfileComponent implements OnInit {
 
   public tickets!: Ticket[];
 
+  public dateString: string = '';
+
   ngOnInit(): void {
     if (localStorage.getItem("adminToken")) {
       this.isAdmin = true;
@@ -34,6 +36,10 @@ export class ProfileComponent implements OnInit {
 
     this.purchaseService.getTickets(this.username).subscribe(resp => {
       this.tickets = resp;
+      for(let i = 0; i < this.tickets.length; i++) {
+        this.tickets[i].datePurchased = new Date(this.tickets[i].datePurchased).toDateString();
+        this.tickets[i].event.Date = new Date(this.tickets[i].event.Date).toDateString();
+      }
     });
   }
 

@@ -78,4 +78,8 @@ export class EventService {
       eventName:eventName
     })
   }
+
+  getGenres(): Observable<string[]> {
+    return this.httpClient.get<string[]>(this.BACKEND_BASE + "/api/event/getGenres")
+  }
 }

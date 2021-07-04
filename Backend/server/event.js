@@ -293,3 +293,21 @@ router.post('/deleteEvent', (req, res) => {
         }
     });
 });
+
+router.get('/getGenres', (req, res) => {
+    var genres;
+
+    var sql = "SELECT Name FROM genre";
+    mysqlConnection.query(sql, function (err, result) {
+        if (err) {
+            switch (err.code) {
+                default:
+                    res.status(500).json({ msg: err.message });
+            }
+        }
+        else {
+            genres = result;
+            res.status(200).json(genres);
+        }
+    });
+});
