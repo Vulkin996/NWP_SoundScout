@@ -23,6 +23,10 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.email, this.password).subscribe(
       success => {
         localStorage.setItem("token", success.token);
+        if(success.adminToken){
+          localStorage.setItem("adminToken", success.adminToken);
+        }
+
         window.location.href = '/home';
       },
       error => {

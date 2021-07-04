@@ -23,6 +23,7 @@ import { RemoveLocationComponent } from './adminFunctions/remove-location/remove
 import { EventItemComponent } from './event-item/event-item.component';
 import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   { path:'', redirectTo:'/home', pathMatch:'full' },
@@ -30,7 +31,7 @@ const routes: Routes = [
   { path:'login', component:LoginComponent },
   { path:'register', component:RegisterComponent },
   { path:'profile', component:ProfileComponent, canActivate:[AuthGuard] },
-  { path:'admin', component:AdminComponent, canActivate:[AuthGuard]}
+  { path:'admin', component:AdminComponent, canActivate:[AuthGuard, AdminGuard] }
 ];
 
 @NgModule({

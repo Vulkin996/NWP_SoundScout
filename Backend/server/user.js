@@ -7,7 +7,7 @@ const mysqlConnection = require('./connection.js');
 router.post('/login', (req, res) => {
     var user = req.body;
 
-    var sql = "SELECT email, password FROM user WHERE email = '" + user.email + "' AND password = '" + user.password + "'";
+    var sql = "SELECT email, password, isAdmin FROM user WHERE email = '" + user.email + "' AND password = '" + user.password + "'";
     mysqlConnection.query(sql, function (err, result) {
         if (err) {
             switch (err.code) {
@@ -22,10 +22,21 @@ router.post('/login', (req, res) => {
             }
             else {
                 console.log("User successfully logged in");
-                res.json({
-                    msg: 'Successfully logged in',
-                    token: jwt.sign({ user: user.username }, 'SECRET')
-                });
+
+                if(result[0].isAdmin){
+                    console.log("User is an admin");
+                    res.json({
+                        msg: 'Successfully logged in',
+                        token: jwt.sign({ user: user.username }, 'SECRET'),
+                        adminToken: jwt.sign({ user: user.username }, 'ADMINSECRET')
+                    });
+                }
+                else {
+                    res.json({
+                        msg: 'Successfully logged in',
+                        token: jwt.sign({ user: user.username }, 'SECRET')
+                    });
+                }
             }
         }
     });
