@@ -115,4 +115,22 @@ router.post('/deleteUser', (req, res) => {
     });
 });
 
+router.post('/giveAdmin', (req, res) => {
+    var user = req.body;
+
+    var sql = "UPDATE user SET isAdmin = 1 WHERE username = ?";
+    mysqlConnection.query(sql, [user.username], function (err, result) {
+        if (err) {
+            switch (err.code) {
+                default:
+                    res.status(500).json({ msg: err.message });
+            }
+        }
+        else {
+            res.status(200).json({ msg: "User successfully promoted!" });
+            console.log("User successfully promoted!");
+        }
+    });
+});
+
 module.exports = router;

@@ -9,22 +9,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarMenu">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+            <li class="nav-item" [ngClass]="{'active' : activeTabIndex == 0}">
+                <a class="nav-link" href="home">Home <span class="sr-only"></span></a>
             </li>
-            <li class="nav-item" *ngIf="isLoggedIn">
+            <li class="nav-item" *ngIf="isLoggedIn" [ngClass]="{'active' : activeTabIndex == 1}">
                 <a class="nav-link" href="profile">Profile</a>
             </li>
-            <li class="nav-item" *ngIf="isLoggedIn && isAdmin">
+            <li class="nav-item" *ngIf="isLoggedIn && isAdmin" [ngClass]="{'active' : activeTabIndex == 2}">
                 <a class="nav-link" href="admin">Administration</a>
             </li>
         </ul>
 
         <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
+            <li class="nav-item" [ngClass]="{'active' : activeTabIndex == 3}">
                 <a class="nav-link" href="login" *ngIf="!isLoggedIn">Login</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" [ngClass]="{'active' : activeTabIndex == 4}">
                 <a class="nav-link" href="register" *ngIf="!isLoggedIn">Register</a>
             </li>
             <li class="nav-item">

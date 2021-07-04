@@ -17,7 +17,6 @@ export class RemoveUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getUsername("").subscribe(resp => {
-      console.log(resp)
       this.users = resp;
     });
   }

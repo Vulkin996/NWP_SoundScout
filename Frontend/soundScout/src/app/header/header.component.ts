@@ -9,6 +9,8 @@ export class HeaderComponent implements OnInit {
   public isLoggedIn: boolean = false;
   public isAdmin: boolean = false;
 
+  public activeTabIndex: number = -1;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -17,6 +19,26 @@ export class HeaderComponent implements OnInit {
     }
     if (localStorage.getItem("adminToken")) {
       this.isAdmin = true;
+    }
+
+    var lastPath: string = window.location.href.substring(window.location.href.lastIndexOf('/'));
+
+    switch (lastPath) {
+      case '/home':
+        this.activeTabIndex = 0
+        break;
+      case '/profile':
+        this.activeTabIndex = 1
+        break;
+      case '/admin':
+        this.activeTabIndex = 2
+        break;
+      case '/login':
+        this.activeTabIndex = 3
+        break;
+      case '/register':
+        this.activeTabIndex = 4
+        break;
     }
   }
 

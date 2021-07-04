@@ -42,4 +42,10 @@ export class UserService {
     })
   }
 
+  giveAdmin(username: string):Observable<any> {
+    return this.httpClient.post(this.BACKEND_BASE + "/api/user/giveAdmin", {
+      username:username
+    })
+  }
+
 }
