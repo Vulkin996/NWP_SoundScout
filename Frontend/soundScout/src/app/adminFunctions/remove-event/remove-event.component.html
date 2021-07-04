@@ -6,7 +6,7 @@
         <div class="form-group">
             <select name="chosenEvent" class="form-control" [(ngModel)]="chosenEvent">
                 <option selected value='' disabled>Choose...</option>
-                <option *ngFor="let event of events" value="{{event.Name}}">{{event.Name}}</option>
+                <option *ngFor="let event of events" value="{{event.eventName}}">{{event.eventName}}</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Delete</button>

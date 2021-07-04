@@ -17,6 +17,7 @@ export class AddEventComponent implements OnInit {
   public location: string = '';
   public maxTickets: number = 0;
   public date: Date = new Date();
+  public picture: string = '';
 
   public artists: Artist[] = [];
   public locations: EventLocation[] = [];
@@ -34,8 +35,7 @@ export class AddEventComponent implements OnInit {
   }
 
   addEvent() {
-    console.log(this.name +" "+ this.location+" "+ this.artist+" "+ this.date+" "+ this.price+" "+ this.type+" "+ this.maxTickets)
-    this.eventService.addEvent(this.name, this.location, this.artist, this.date, this.price, this.type, this.maxTickets).subscribe(resp => {
+    this.eventService.addEvent(this.name, this.location, this.artist, this.date, this.price, this.type, this.maxTickets, this.picture).subscribe(resp => {
       alert(resp.msg);
     })
   }

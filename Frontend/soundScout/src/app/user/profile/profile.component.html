@@ -39,7 +39,7 @@
         <div class="card-footer bg-white px-0 ">
             <div class="row">
                 <ul class="list-group">
-                    <li *ngFor="let ticket of tickets" class="list-group-item">Example Event | Stark Arena | 11-11-2011 | {{ticket.firstName}} {{ticket.lastName}}</li>
+                    <li *ngFor="let ticket of tickets" class="list-group-item">{{ticket.event.eventName}} • {{ticket.event.Location.Name}} • {{ticket.event.Date}} • {{ticket.firstName}} {{ticket.lastName}} • Bought: {{ticket.datePurchased}} • {{ticket.event.Price}}$</li>
                   </ul>
             </div>
         </div>

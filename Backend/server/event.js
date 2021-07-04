@@ -226,8 +226,9 @@ router.post('/addEvent', (req, res) => {
 router.get('/getEvent', (req, res) => {
 
     var events;
+    var formatedEvents;
 
-    var sql = "SELECT * FROM event";
+    var sql = "SELECT e.Name as eventName, l.Name as locationName, l.Country as country, l.City as city, l.Address as address, a.Name as artistName, g.Name as genreName, e.Date, e.Price, e.Type, e.MaxTickets, e.picture FROM event e JOIN location l ON e.LocationID = l.idlocation JOIN artist a ON e.ArtistID = a.idArtist JOIN genre g ON a.genreID = g.idgenre";
     mysqlConnection.query(sql, function (err, result) {
         if (err) {
             switch (err.code) {
@@ -244,7 +245,33 @@ router.get('/getEvent', (req, res) => {
                     (event) => event.name.toLowerCase().indexOf(query) != -1);
                 return res.status(200).json(foundProducts);
             }
-            return res.status(200).json(events);
+
+            for (let i = 0; i < events.length; i++) {
+                events[i]
+            }
+
+            formatedEvents = events.map(x => {
+                return {
+                    eventName: x.eventName,
+                    Location: {
+                        Name: x.locationName,
+                        Country: x.country,
+                        City: x.city,
+                        Address: x.address
+                    },
+                    Artist: {
+                        Name: x.artistName,
+                        Genre: x.genreName
+                    },
+                    Date: x.Date,
+                    Price: x.Price,
+                    Type: x.Type,
+                    MaxTickets: x.MaxTickets,
+                    Picture: x.picture
+                }
+            });
+
+            return res.status(200).json(formatedEvents);
         }
     });
 });

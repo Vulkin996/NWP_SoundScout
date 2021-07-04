@@ -61,9 +61,10 @@ router.post('/makePurchase', (req, res) => {
 router.get('/getTickets', (req, res) => {
 
     var tickets;
+    var formatedTickets
     var username = (req.query['u'] || '');
 
-    var sql = "SELECT * FROM reservation r JOIN user u ON r.userID = u.iduser WHERE u.username = ?";
+    var sql = "SELECT u.username, r.firstName, r.lastName, e.Name as eventName, l.Name as locationName, l.Country as country, l.City as city, l.Address as address, a.Name as artistName, g.Name as genreName, e.Date, e.Price, e.Type, e.MaxTickets, e.picture, r.paymentMethod, r.dateReserved FROM reservation r JOIN user u ON r.userID = u.iduser JOIN event e ON r.eventID = e.idevent JOIN location l ON e.LocationID = l.idlocation JOIN artist a ON e.ArtistID = a.idArtist JOIN genre g ON a.GenreID = g.idgenre WHERE u.username = ?";
     mysqlConnection.query(sql, [username], function (err, result) {
         if (err) {
             switch (err.code) {
@@ -73,7 +74,35 @@ router.get('/getTickets', (req, res) => {
         }
         else {
             tickets = result;
-            return res.status(200).json(tickets);
+
+            formatedTickets = tickets.map(x => {
+                return {
+                    event: {
+                        eventName: x.eventName,
+                        Location: {
+                            Name: x.locationName,
+                            Country: x.country,
+                            City: x.city,
+                            Address: x.address
+                        },
+                        Artist: {
+                            Name: x.artistName,
+                            Genre: x.genreName
+                        },
+                        Date: x.Date,
+                        Price: x.Price,
+                        Type: x.Type,
+                        MaxTickets: x.MaxTickets,
+                        Picture: x.picture
+                    },
+                    firstName: x.firstName,
+                    lastName: x.lastName,
+                    payment: x.paymentMethod,
+                    datePurchased: x.dateReserved
+                }
+            });
+
+            return res.status(200).json(formatedTickets);
         }
     });
 });

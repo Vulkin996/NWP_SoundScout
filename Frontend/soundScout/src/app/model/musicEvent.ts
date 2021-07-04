@@ -2,7 +2,7 @@ import { Artist } from "./Artist";
 import { EventLocation } from "./EventLocation";
 
 export interface MusicEvent {
-    Name: string;
+    eventName: string;
     Location: EventLocation;
     Artist: Artist;
     Date: Date;

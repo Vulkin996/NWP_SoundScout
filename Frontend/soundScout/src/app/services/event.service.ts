@@ -54,7 +54,7 @@ export class EventService {
     })
   }
 
-  addEvent(name: string, locationName: string, artistName: string, date: Date, price: number, type: string, maxTickets: number): Observable<any> {
+  addEvent(name: string, locationName: string, artistName: string, date: Date, price: number, type: string, maxTickets: number, picture: string): Observable<any> {
     return this.httpClient.post(this.BACKEND_BASE + "/api/event/addEvent", {
       name:name,
       locationName:locationName,
@@ -63,7 +63,7 @@ export class EventService {
       price: price,
       type: type,
       maxTickets: maxTickets,
-      picture: ""
+      picture: picture
     })
   }
 

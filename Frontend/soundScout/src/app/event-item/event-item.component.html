@@ -1,14 +1,14 @@
 <div class="card mb-4 box-shadow">
     <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
         alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;"
-        src="assets/image/default-thumbnail.png"
+        src="{{pictureLink}}"
         data-holder-rendered="true">
     <div class="card-body">
         <div class="text-center">
-            <h4>{{eventData.Name}}</h4>
-            <small class="text-muted">{{eventData.Type}}</small>
+            <h4>{{eventData.Artist.Name}}</h4>
+            <small class="text-muted">{{eventData.Artist.Genre}} • {{eventData.Type}}</small>
 
-            <p class="card-text">Country City Location Full Name</p>
+            <p class="card-text">{{eventData.Location.Country}} • {{eventData.Location.City}} • {{eventData.Location.Name}}</p>
             <p class="card-text">{{eventData.Date}}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
