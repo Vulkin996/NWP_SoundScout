@@ -7,7 +7,7 @@ const mysqlConnection = require('./connection.js');
 router.post('/login', (req, res) => {
     var user = req.body;
 
-    var sql = "SELECT username, email, password, isAdmin FROM user WHERE email = ? AND password = ?";
+    var sql = "SELECT username, email, password, isAdmin, dateRegistered FROM user WHERE email = ? AND password = ?";
     mysqlConnection.query(sql, [user.email, user.password], function (err, result) {
         if (err) {
             switch (err.code) {
@@ -27,6 +27,7 @@ router.post('/login', (req, res) => {
                     res.json({
                         msg: 'Successfully logged in',
                         username: result[0].username,
+                        date: result[0].dateRegistered,
                         token: jwt.sign({ user: result[0].username }, 'SECRET'),
                         adminToken: jwt.sign({ user: result[0].username }, 'ADMINSECRET')
                     });
@@ -35,6 +36,7 @@ router.post('/login', (req, res) => {
                     res.json({
                         msg: 'Successfully logged in',
                         username: result[0].username,
+                        date: result[0].dateRegistered,
                         token: jwt.sign({ user: result[0].username }, 'SECRET')
                     });
                 }
@@ -46,8 +48,10 @@ router.post('/login', (req, res) => {
 router.post('/register', (req, res) => {
     var user = req.body;
 
-    var sql = "INSERT INTO user (username, email, password) VALUES ('" + user.username + "', '" + user.email + "', '" + user.password + "' )";
-    mysqlConnection.query(sql, function (err, result) {
+    var date = new Date();
+
+    var sql = "INSERT INTO user (username, email, password, dateRegistered) VALUES (?, ?, ?, ?)";
+    mysqlConnection.query(sql, [user.username, user.email, user.password, date], function (err, result) {
         if (err) {
             switch (err.code) {
                 case 'ER_DUP_ENTRY':

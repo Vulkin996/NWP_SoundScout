@@ -23,7 +23,9 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.email, this.password).subscribe(
       success => {
         localStorage.setItem("loggedUser", success.username);
+        localStorage.setItem("email", this.email);
         localStorage.setItem("token", success.token);
+        localStorage.setItem("dateRegistered", success.date);
         if(success.adminToken){
           localStorage.setItem("adminToken", success.adminToken);
         }

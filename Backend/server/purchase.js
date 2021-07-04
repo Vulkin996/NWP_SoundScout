@@ -58,4 +58,24 @@ router.post('/makePurchase', (req, res) => {
     });
 });
 
+router.get('/getTickets', (req, res) => {
+
+    var tickets;
+    var username = (req.query['u'] || '');
+
+    var sql = "SELECT * FROM reservation r JOIN user u ON r.userID = u.iduser WHERE u.username = ?";
+    mysqlConnection.query(sql, [username], function (err, result) {
+        if (err) {
+            switch (err.code) {
+                default:
+                    res.status(500).json({ msg: err.message });
+            }
+        }
+        else {
+            tickets = result;
+            return res.status(200).json(tickets);
+        }
+    });
+});
+
 module.exports = router;

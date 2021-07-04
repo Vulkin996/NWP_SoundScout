@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Ticket } from '../model/Ticket';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,12 @@ export class PurchaseService {
       address:address,
       address2:address2,
       payment:payment
+    })
+  }
+
+  getTickets(username: string): Observable<Ticket[]> {
+    return this.httpClient.get<Ticket[]>(this.BACKEND_BASE + "/api/purchase/getTickets", {
+      params: {u: username}
     })
   }
 }
