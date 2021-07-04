@@ -10,5 +10,6 @@ app.use(express.json());
 
 app.use('/api/user', require('./user'));
 app.use('/api/event', require('./event'));
+app.use('/api/purchase', require('./purchase'));
 
 app.listen(3000, () => { console.log('Server started at port 3000....') });
