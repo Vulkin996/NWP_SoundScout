@@ -25,6 +25,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { AdminGuard } from './guards/admin.guard';
 import { PurchaseComponent } from './purchase/purchase.component';
+import { ChangePasswordComponent } from './user/change-password/change-password.component';
 
 const routes: Routes = [
   { path:'', redirectTo:'/home', pathMatch:'full' },
@@ -33,7 +34,8 @@ const routes: Routes = [
   { path:'register', component:RegisterComponent },
   { path:'profile', component:ProfileComponent, canActivate:[AuthGuard] },
   { path:'admin', component:AdminComponent, canActivate:[AuthGuard, AdminGuard] },
-  { path:'purchase', component:PurchaseComponent, canActivate:[AuthGuard] }
+  { path:'purchase', component:PurchaseComponent, canActivate:[AuthGuard] },
+  { path:'changePassword', component:ChangePasswordComponent, canActivate:[AuthGuard] }
 ];
 
 @NgModule({
@@ -54,7 +56,8 @@ const routes: Routes = [
     AddLocationComponent,
     RemoveLocationComponent,
     EventItemComponent,
-    PurchaseComponent
+    PurchaseComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

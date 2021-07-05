@@ -48,4 +48,12 @@ export class UserService {
     })
   }
 
+  changePassword(username: string, oldPassword: string, newPassword: string): Observable<any> {
+    return this.httpClient.post(this.BACKEND_BASE + "/api/user/changePassword", {
+      username:username,
+      oldPassword:oldPassword,
+      newPassword:newPassword
+    })
+  }
+
 }

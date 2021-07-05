@@ -23,7 +23,7 @@ router.post('/login', (req, res) => {
             else {
                 console.log("User successfully logged in");
 
-                if(result[0].isAdmin){
+                if (result[0].isAdmin) {
                     res.json({
                         msg: 'Successfully logged in',
                         username: result[0].username,
@@ -135,6 +135,42 @@ router.post('/giveAdmin', (req, res) => {
         else {
             res.status(200).json({ msg: "User successfully promoted!" });
             console.log("User successfully promoted!");
+        }
+    });
+});
+
+router.post('/changePassword', (req, res) => {
+    var user = req.body;
+
+    var sql = "SELECT iduser, password FROM user WHERE username = ?";
+    mysqlConnection.query(sql, [user.username], function (err, result) {
+        if (err) {
+            switch (err.code) {
+                default:
+                    res.status(500).json({ msg: err.message });
+            }
+        }
+        else {
+            if (result.length != 1) {
+                res.status(500).json({ msg: "User not found!" });
+            }
+            else if (result[0].password != user.oldPassword) {
+                res.status(400).json({ msg: "Old password is not correct!" });
+            }
+            else {
+                var sql = "UPDATE user SET password = ? WHERE iduser = ?";
+                mysqlConnection.query(sql, [user.newPassword, result[0].iduser], function (err, result2) {
+                    if (err) {
+                        switch (err.code) {
+                            default:
+                                res.status(500).json({ msg: err.message });
+                        }
+                    }
+                    else {
+                        res.status(200).json({ msg: "Password changed successfully!" });
+                    }
+                });
+            }
         }
     });
 });
