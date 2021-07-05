@@ -19,8 +19,6 @@ export class ProfileComponent implements OnInit {
 
   public tickets!: Ticket[];
 
-  public dateString: string = '';
-
   ngOnInit(): void {
     if (localStorage.getItem("adminToken")) {
       this.isAdmin = true;
@@ -29,7 +27,7 @@ export class ProfileComponent implements OnInit {
     var username: any = localStorage.getItem("loggedUser")
     this.username = username;
     var dateRegistered: any = localStorage.getItem("dateRegistered")
-    this.date = dateRegistered;
+    this.date = new Date(dateRegistered).toDateString();
 
     var email: any = localStorage.getItem("email")
     this.email = email;
